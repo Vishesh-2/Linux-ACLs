@@ -1,7 +1,9 @@
 # ACLs_and_setuid in LINUX
 
 ## Description of the Systems
-* The provided directory `ACLs_and_setuid` implements custom ACL in a linux system keeping emphasis on `setuid` system call.
+* The provided directory `ACLs_and_setuid` implements custom ACL and its correponding custom sudo in a linux system keeping emphasis on `setuid` system call.
+
+* Custom sudo program is referred as `simple_sudo` and is owned by `root`. It allows executing commands of ACLs by a user who does not have relevant permission. It is analogous to the default sudo in linux that gives over and above access to the user than he currently has. It enables the current user to perform an action as the owner of the file on which action needs to be performed.
 
 * Implementation done on an Ubuntu 20.04 VM.
 
@@ -39,6 +41,12 @@ This needs to be executed in each instance of the shell you want to run the prog
 
 * `change_dir DIRECTORY_NAME` - changes the directory but is not reflected. The change is confirmed by printing the output of getcwd(). This has been implemented because the implementation of `aclcd` cannot be implemented with `simple_sudo`.
 
+* Command to execute a program using `simple_sudo`: `simple_sudo ACL_CMD PROG_ARGS`
+
+    * `ACL_CMD` is one command out of those listed below, supported in Linux ACLs implementation.
+    
+    * `PROG_ARGS` are the command line arguments to be provided to the executible that needs to be run via simple_sudo program.
+
 
 ## Assumptions
 
@@ -59,3 +67,23 @@ This needs to be executed in each instance of the shell you want to run the prog
 * The permissions specified in setacl need to be specified in a 3 character format: `rwx`. In case you do not want to grant a permission, enter `-` in its position.
 
 * On re-entering the permission of a user, their permissions are updated as per the new permissions provided.
+
+* The `create_file` and `create_dir` commands, when used with simple_sudo, make the owner of the directory as their owner.
+
+* Only the following commands can be used with simple_sudo:
+
+    * `create_file`
+    
+    * `create_dir`
+
+    * `fput`
+
+    * `fget`
+
+    * `change_dir`
+
+    * `getacl`
+
+    * `setacl`
+
+* In case the owner also does not have appropriate permissions despite using `simple_sudo`, a permission denied message would be printed.
