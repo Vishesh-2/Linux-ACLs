@@ -1,7 +1,7 @@
 # ACLs_and_setuid in LINUX
 
 ## Overview
-Implemented custom **Access Control Lists' Directory** structure in linux with a **custom sudo** program for ACL managed files. ACLs handle **rwx** permissions at user level for each file and directory via **file-headers** and **directory attributes** respectively. Used **Bash** & **C**.
+Implemented custom **Access Control Lists' Directory** structure in linux with a __custom sudo__ program for ACL managed files. ACLs handle **rwx** permissions at user level for each file and directory via **file-headers** and **directory attributes** respectively. Used **Bash** & **C**.
 
 ## Description of the Systems
 * The provided directory `ACLs_and_setuid` implements custom ACL and its correponding custom sudo in a linux system keeping emphasis on `setuid` system call.
